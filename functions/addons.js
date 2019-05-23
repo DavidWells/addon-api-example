@@ -1,4 +1,4 @@
-const api = require('./methods')
+const api = require('./api')
 
 exports.handler = async (event, context) => {
   const path = event.path.replace(/\.netlify\/functions\/[^/]+/, '')
