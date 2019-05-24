@@ -1,4 +1,3 @@
-
 // Update the instance
 module.exports = async (event, context) => {
   const addonInstanceId = event.id
@@ -19,8 +18,8 @@ module.exports = async (event, context) => {
     // endpoint: `${API_URL}/${instanceId}`,
     config: addonConfiguration,
     env: {
-      'TEST_ENV_VARIABLE': 'value',
-      'MY_PROVIDER_SECRET': 'shhhhhh',
+      TEST_ENV_VARIABLE: 'value',
+      MY_PROVIDER_SECRET: 'shhhhhh'
     }
   }
 

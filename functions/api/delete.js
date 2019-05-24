@@ -1,5 +1,3 @@
-
-
 module.exports = async (event, context) => {
   const id = event.id
   console.log(`Function 'delete' invoked. delete id: ${id}`)
@@ -11,6 +9,6 @@ module.exports = async (event, context) => {
     statusCode: 204,
     body: JSON.stringify({
       delete: true
-    }),
+    })
   }
 }

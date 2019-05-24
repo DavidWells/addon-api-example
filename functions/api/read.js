@@ -1,5 +1,3 @@
-
-
 module.exports = async (event, context) => {
   const addonInstanceId = event.id
   console.log(`Read id: ${addonInstanceId}`)
@@ -12,10 +10,10 @@ module.exports = async (event, context) => {
     statusCode: 200,
     body: JSON.stringify({
       env: {
-        'YOUR_SERVICE_API_SECRET': 'value'
+        YOUR_SERVICE_API_SECRET: 'value'
       },
       config: {
-        MESSAGE: 'cool',
+        MESSAGE: 'cool'
       },
       snippets: [
         {

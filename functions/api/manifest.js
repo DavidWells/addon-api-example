@@ -1,7 +1,5 @@
-
-
 module.exports = async (event, context) => {
-	// Return information about your addon
+  // Return information about your addon
   return {
     statusCode: 200,
     body: JSON.stringify({
@@ -9,15 +7,15 @@ module.exports = async (event, context) => {
       description: 'This addon yells at visitors',
       // admin_url: 'https://admin.my-app.com',
       config: {
-        'MESSAGE': {
+        MESSAGE: {
           // An alternate, human-friendly name.
-          'displayName': 'What do you want to yell?',
+          displayName: 'What do you want to yell?',
           // Type of field
-          'type': 'string',
+          type: 'string',
           // If is required or not
-          'required': true,
-        },
-      },
+          required: true
+        }
+      }
     })
-	}
+  }
 }
