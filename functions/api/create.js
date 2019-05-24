@@ -2,22 +2,20 @@ const util = require('util')
 
 module.exports = async (event, context) => {
   const body = JSON.parse(event.body)
-  console.log('body', util.inspect(body, false, null))
+
+  const config = body.config
   const addonConfiguration = config.config
-  console.log('Create config values', userConfig)
+  console.log('addonConfiguration', addonConfiguration)
+
+  const addonInstanceId = uuid()
+  console.log(`ID for subsequent Update/Get/Delete calls: ${addonInstanceId}`)
 
   /* Do provisioning logic here */
 
   // provision XYZ
 
-  // This response will set values back inside of the netlify account to the given site
-
-  const addonInstanceId = uuid()
-  console.log(`ID for subsequent Update/Get/Delete calls: ${addonInstanceId}`)
-
   const response = {
     id: addonInstanceId,
-    message: message,
     // endpoint: `${API_URL}/${instanceId}`,
     config: addonConfiguration,
     env: {

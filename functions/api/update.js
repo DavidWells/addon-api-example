@@ -5,7 +5,9 @@ module.exports = async (event, context) => {
   console.log(`Function 'update' invoked. update id: ${addonInstanceId}`)
   const body = JSON.parse(event.body)
 
-  const addonConfiguration = body.config.config
+  const config = body.config
+  const addonConfiguration = config.config
+  console.log('addonConfiguration', addonConfiguration)
 
   /* Fetch existing data */
 

@@ -2,25 +2,33 @@ const api = require('./api')
 
 exports.handler = async (event, context) => {
   const path = event.path.replace(/\.netlify\/functions\/[^/]+/, '')
-  console.log('path', path)
   const segments = path.split('/').filter(e => e)
-  console.log('segments', segments)
 
-  if (path === 'manifest') {
+  const cleanPath = path.replace(/^\/\//, '')
+  if (cleanPath === 'manifest') {
     return api.manifest(event, context)
   }
 
-  if (path === 'instances') {
-     switch (event.httpMethod) {
+  if (cleanPath.match(/^instances/)) {
+    switch (event.httpMethod) {
 	    case 'GET':
 	      /* GET /.netlify/functions/instances/123456 */
 	      if (segments.length === 1) {
-	        event.id = segments[0]
+	        return {
+	          statusCode: 500,
+	          body: JSON.stringify({
+        			error: 'Missing addonInstance ID'
+      			})
+	        }
+	      } else if (segments.length === 2) {
+	        event.id = segments[2]
 	        return api.read(event, context)
 	      } else {
 	        return {
 	          statusCode: 500,
-	          body: 'too many segments in GET request'
+	          body: JSON.stringify({
+        			error: 'too many segments in GET request'
+      			})
 	        }
 	      }
 	    /* POST /.netlify/functions/api */
@@ -28,24 +36,42 @@ exports.handler = async (event, context) => {
 	      return api.create(event, context)
 	    /* PUT /.netlify/functions/instances/123456 */
 	    case 'PUT':
-	      if (segments.length === 1) {
-	        event.id = segments[0]
+	    	if (segments.length === 1) {
+	        return {
+	          statusCode: 500,
+	          body: JSON.stringify({
+        			error: 'Missing addonInstance ID'
+      			})
+	        }
+	      } else if (segments.length === 2) {
+	        event.id = segments[2]
 	        return api.update(event, context)
 	      } else {
 	        return {
 	          statusCode: 500,
-	          body: 'invalid segments in POST request, must be /.netlify/functions/api/123456'
+	          body: JSON.stringify({
+        			error: 'invalid segments in POST request'
+      			})
 	        }
 	      }
 	    /* DELETE /.netlify/functions/instances/123456 */
 	    case 'DELETE':
-	      if (segments.length === 1) {
-	        event.id = segments[0]
+	    	if (segments.length === 1) {
+	        return {
+	          statusCode: 500,
+	          body: JSON.stringify({
+        			error: 'Missing addonInstance ID'
+      			})
+	        }
+	      } else if (segments.length === 2) {
+	        event.id = segments[2]
 	        return api.delete(event, context)
 	      } else {
 	        return {
 	          statusCode: 500,
-	          body: 'invalid segments in DELETE request, must be /.netlify/functions/api/123456'
+	          body: JSON.stringify({
+        			error: 'invalid segments in DELETE request'
+      			})
 	        }
 	      }
 	    /* Fallthrough case */
