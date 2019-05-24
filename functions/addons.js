@@ -1,5 +1,10 @@
 const api = require('./api')
 
+/**
+This file acts as a routing layer to create a netlify Addon API
+The core logic lives in the /api/ folder
+*/
+
 exports.handler = async (event, context) => {
   const path = event.path.replace(/\.netlify\/functions\/[^/]+/, '')
   const segments = path.split('/').filter(e => e)
