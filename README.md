@@ -27,15 +27,15 @@ npm install netlify-cli -g
 2. Clone down your fork
 3. Initialize a new netlify site (or link it)
 
-```
-netlify init
-```
+		```
+		netlify init
+		```
 
-Or link to existing site
+		Or link to existing site
 
-```
-netlify link
-```
+		```
+		netlify link
+		```
 
 3. Run build
 
